@@ -81,7 +81,7 @@ class App extends React.Component {
           <Group category="flowchart" title="Flowchart" expanded={true} />
         </Toolbox>
       </Diagram>
-      <button onClick={() => this.exportStuff()}>test</button>
+      <button className="btn btn-dark my-2"onClick={() => this.exportStuff()}>test</button>
       </>
     );
   }

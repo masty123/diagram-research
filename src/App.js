@@ -26,8 +26,8 @@ function App() {
       {/* </header>
       <QReader/> */}
       
-          {/* <Diagram/> */}
-          <div style={{height: 800}}>
+          <Diagram/>
+            <div className="my-2" style={{height: 800}}>
           <FlowChart/> 
           </div>
       </div>
