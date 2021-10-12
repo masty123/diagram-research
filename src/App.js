@@ -25,11 +25,25 @@ function App() {
         </a> */}
       {/* </header>
       <QReader/> */}
-      
-          <Diagram/>
-            <div className="my-2" style={{height: 800}}>
-          <FlowChart/> 
+          <div className="row mx-5"> 
+            <div className="col-12">
+               <h5 className="font-weight-bold text-left">Devextreme Diagram Chart</h5>
+            </div>
+            <div className="col-12">
+               <Diagram/>
+            </div>
           </div>
+          <div className="row  mx-5"> 
+            <div className="col-12">
+               <h5 className="font-weight-bold text-left">React Flow Diagram Chart</h5>
+            </div>
+            <div className="col-12">
+                  <div className="my-2" style={{height: 800}}>
+                      <FlowChart/> 
+                </div>
+            </div>
+          </div>
+
       </div>
   );
 }
