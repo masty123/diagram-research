@@ -3,13 +3,14 @@ import './App.css';
 import QReader from './qr_reader'
 import Diagram from "./diagram"
 import FlowChart from "./diam_flow_chart"
+import GoogleSheet from './googlesheet';
 
 const pageCommands = ['pageSize', 'pageOrientation', 'pageColor'];
 const menuCommands = ['bringToFront', 'sendToBack', 'lock', 'unlock'];
 
 function App() {
   return (
-      <div className="App">
+      <div className="" style={{height: "100%"}}>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo"  /> */}
         {/* <p>
@@ -25,6 +26,8 @@ function App() {
         </a> */}
       {/* </header>
       <QReader/> */}
+
+
           <div className="row mx-5"> 
             <div className="col-12">
                <h5 className="font-weight-bold text-left">Devextreme Diagram Chart</h5>
@@ -43,6 +46,15 @@ function App() {
                 </div>
             </div>
           </div>
+
+        {/* <div className="row mx-5"> 
+            <div className="col-12">
+               <h5 className="font-weight-bold text-left">Google  Sheet</h5>
+            </div>
+            <div className="col-12">
+              <GoogleSheet/>
+            </div>
+          </div> */}
 
       </div>
   );
