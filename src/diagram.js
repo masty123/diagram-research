@@ -79,7 +79,7 @@ class App extends React.Component {
         <Toolbox visibility="visible" showSearch={false} shapeIconsPerRow={4} width={220}>
           {/* <Group category="general" title="General" />
           <Group category="flowchart" title="Flowchart" expanded={true} /> */}
-          <Group category="general" title="General" shapes={['rectangle']} />        
+          <Group category="general" title="General" shapes={['rectangle', 'diamond', 'ellipse']} />        
         </Toolbox>
       </Diagram>
       <button className="btn btn-dark my-2"onClick={() => this.exportStuff()}>test</button>
