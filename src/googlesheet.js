@@ -2,11 +2,6 @@ import React from 'react';
 import ReactGoogleSheets from 'react-google-sheets';
 // import  Xlsx, {} from  "xlsx";
 
-const CLIENT_ID =  "1079147591732-i0rec0rto5jimqsj1qrs0889nq81um87.apps.googleusercontent.com"
-const API_KEY = "AIzaSyCTeScfEIshGxW7IQsnAPIU6kYlnP3bwfs";
-const SPREADSHEET_ID = "1MI8YLt5P3UjVwDPxn9SgD6TgD3YQAnr_";
-const SPREADSHEET_NAME = "test";
-
  
 class DataComponent extends React.Component {
   constructor(props) {
