@@ -11,9 +11,9 @@ class App extends Component {
     super(props);
     this.state = {
       step_list: [
-        {text: "Step Flow 1", id: 1, type: "rectangle"},
-        {text: "Step Flow 2", id: 2, type: "diamond"},
-        {text: "Step Flow 3", id: 3, type: "ellipse"},
+        {text: "Step Flow 1 ", id: 1, type: "rectangle"},
+        {text: "Step Flow 2 ", id: 2, type: "diamond"},
+        {text: "Step Flow 3 ", id: 3, type: "ellipse"},
       ]
     }
 
