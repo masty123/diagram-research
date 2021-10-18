@@ -1,14 +1,21 @@
-import React from 'react';
-import Diagram, { ContextMenu, ContextToolbox, PropertiesPanel, Group, Tab, HistoryToolbar, ViewToolbar, MainToolbar, Command, Toolbox } from 'devextreme-react/diagram';
+import React, {Component} from 'react';
+import Diagram, { ContextMenu, ContextToolbox, PropertiesPanel, Group, Tab, HistoryToolbar, ViewToolbar, MainToolbar, Command, Toolbox, CustomShape } from 'devextreme-react/diagram';
 import { confirm } from 'devextreme/ui/dialog';
 import 'whatwg-fetch';
 
 const pageCommands = ['pageSize', 'pageOrientation', 'pageColor'];
 const menuCommands = ['bringToFront', 'sendToBack', 'lock', 'unlock'];
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      step_list: [
+        {text: "Step Flow 1", id: 1, type: "rectangle"},
+        {text: "Step Flow 2", id: 2, type: "diamond"},
+        {text: "Step Flow 3", id: 3, type: "ellipse"},
+      ]
+    }
 
     this.diagramRef = React.createRef();
   }
@@ -46,6 +53,7 @@ class App extends React.Component {
   }
 
   render() {
+    const {step_list} = this.state;
     return (
       <>
       <Diagram id="diagram" ref={this.diagramRef} onCustomCommand={this.onCustomCommand}>
@@ -76,10 +84,16 @@ class App extends React.Component {
           <Command name="clear" icon="clearsquare" text="Clear Diagram" />
           <Command name="export"/>
         </MainToolbar>
-        <Toolbox visibility="visible" showSearch={false} shapeIconsPerRow={4} width={220}>
-          {/* <Group category="general" title="General" />
-          <Group category="flowchart" title="Flowchart" expanded={true} /> */}
+        {step_list.map((item, index) => {
+          return <CustomShape  category="workflows" type={index} baseType={item.type} defaultText={item.text} allowEditText={false} key={index} />
+        })}
+        {/* <CustomShape category="workflows" type={`1`} baseType="rectangle"
+         defaultText="step 1 test" allowEditText={false} key={1} />; */}
+        {/* <Toolbox visibility="visible" showSearch={false} shapeIconsPerRow={4} width={220}>
           <Group category="general" title="General" shapes={['rectangle', 'diamond', 'ellipse']} />        
+        </Toolbox> */}
+        <Toolbox>
+          <Group category="workflows" title="Work Flows" displayMode="texts" />
         </Toolbox>
       </Diagram>
       <button className="btn btn-dark my-2"onClick={() => this.exportStuff()}>test</button>
@@ -89,3 +103,5 @@ class App extends React.Component {
 }
 
 export default App;
+          {/* <Group category="general" title="General" />
+          <Group category="flowchart" title="Flowchart" expanded={true} /> */}

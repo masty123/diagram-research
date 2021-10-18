@@ -36,7 +36,7 @@ function App() {
                <Diagram/>
             </div>
           </div>
-          <div className="row  mx-5"> 
+          {/* <div className="row  mx-5"> 
             <div className="col-12">
                <h5 className="font-weight-bold text-left">React Flow Diagram Chart</h5>
             </div>
@@ -45,7 +45,7 @@ function App() {
                       <FlowChart/> 
                 </div>
             </div>
-          </div>
+          </div> */}
 
         {/* <div className="row mx-5"> 
             <div className="col-12">
