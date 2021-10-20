@@ -186,6 +186,7 @@ class App extends Component {
           toId: 120
         }
       ],
+      visible_popup: false, 
       selected_node: null
     }
 
@@ -235,7 +236,7 @@ class App extends Component {
   }
 
   onSelectionChanged = ({ items }) => {
-    console.log(items);
+    // console.log(items);
     // var selectedItemNames = "Nobody has been selected";
     // items = items
     //   .filter(function (item) {
@@ -254,7 +255,7 @@ class App extends Component {
     if(items.length > 0){
       var temp = [];
       temp.push({...items[0].dataItem, itemType: items[0].itemType });
-      console.log(temp);
+      // console.log(temp);
       this.setState({
         selected_node: temp[0]
       })
@@ -263,7 +264,54 @@ class App extends Component {
 
   }
 
+  renderPopup(){
+    return (
+      <div 
+      // className="card-table-ma"
+      style={{
+        position: "absolute",
+        top: "55px",
+        right: "25px",
+        width: "auto",
+        height: "auto",
+        zIndex: 9999,
+        background: "white",
+        borderRadius: "2px",
+        boxShadow: "1px -1px 23px 0px rgba(0,0,0,0.75)"
+      }}
+    >
+      <div className="row m-2">
+          <div className="col-12 text-right" onClick={() => this.openPopUp()} style={{cursor: "pointer"}}>x</div>
+      </div>
+      <div className="row m-2">
+          <div className="col-5">
+              <span style={{color: "grey"}}>id: </span>
+          </div>
+          <div className="col-7">
+          <span style={{color: "#0500A3"}}>  {this.state.selected_node != null? this.state.selected_node.id : "-" }</span>
+          </div>
+      </div>
 
+      <div className="row m-2">
+          <div className="col-5">
+          <span style={{color: "grey"}}>text: </span>
+          </div>
+          <div className="col-7">
+            <span style={{color: "#0500A3"}}> {this.state.selected_node != null? this.state.selected_node.text : "-" }</span>
+          </div>
+      </div>
+
+      <div className="row m-2">
+          <div className="col-5">
+          <span style={{color: "grey"}}>type: </span>
+          </div>
+          <div className="col-7">
+            <span style={{color: "#0500A3"}}>{this.state.selected_node != null? this.state.selected_node.itemType : "-" }</span>
+          </div>
+      </div>
+    </div>
+    )
+  }
 
   exportStuff(){
     // this.diagramRef.current.export();
@@ -271,11 +319,14 @@ class App extends Component {
     console.log(export_data);
   }
 
+  openPopUp(){
+    this.setState({visible_popup: !this.state.visible_popup});
+  }
+
   render() {
     const {step_list} = this.state;
     return (
       <>
-      {console.log(this.state.selected_node)}
       <Diagram id="diagram" 
           ref={this.diagramRef} 
           onCustomCommand={this.onCustomCommand} 
@@ -344,52 +395,21 @@ class App extends Component {
           <Group category="workflows" title="Work Flows" displayMode="texts" />
         </Toolbox>
       </Diagram>
-      <div 
-        // className="card-table-ma"
-        style={{
-          position: "absolute",
-          top: "55px",
-          right: "25px",
-          width: "auto",
-          height: "auto",
-          zIndex: 9999,
-          background: "white",
-          borderRadius: "2px",
-          boxShadow: "1px -1px 23px 0px rgba(0,0,0,0.75)"
-        }}
-      >
-        <div className="row m-2">
-            <div></div>
-        </div>
-        <div className="row m-2">
-            <div className="col-5">
-                <span style={{color: "grey"}}>id: </span>
-            </div>
-            <div className="col-7">
-            <span style={{color: "#0500A3"}}>  {this.state.selected_node != null? this.state.selected_node.id : "-" }</span>
-            </div>
-        </div>
+      {this.state.visible_popup === true?
+          this.renderPopup()
+      :
+          null
+      }
 
-        <div className="row m-2">
-            <div className="col-5">
-            <span style={{color: "grey"}}>text: </span>
-            </div>
-            <div className="col-7">
-              <span style={{color: "#0500A3"}}> {this.state.selected_node != null? this.state.selected_node.text : "-" }</span>
-            </div>
+      <div className="row m-2">
+        <div className="col-6">
+          <button className="btn btn-dark my-2"onClick={() => this.exportStuff()}>test</button>
         </div>
-
-        <div className="row m-2">
-            <div className="col-5">
-            <span style={{color: "grey"}}>type: </span>
-            </div>
-            <div className="col-7">
-              <span style={{color: "#0500A3"}}>{this.state.selected_node != null? this.state.selected_node.itemType : "-" }</span>
-            </div>
-        </div>
+        <div className="col-6 text-right"style={{cursor: "pointer"}}>
+              <button  className="btn btn-dark my-2" onClick={()=> this.openPopUp()}>show node info</button>
+          </div>
       </div>
-      <button className="btn btn-dark my-2"onClick={() => this.exportStuff()}>test</button>
-
+     
       </>
     );
   }
