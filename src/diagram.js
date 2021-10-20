@@ -1,10 +1,18 @@
 import React, {Component} from 'react';
-import Diagram, { ContextMenu, ContextToolbox, PropertiesPanel, Group, Tab, HistoryToolbar, ViewToolbar, MainToolbar, Command, Toolbox, CustomShape,   Nodes,Edges, AutoLayout, Editing } from 'devextreme-react/diagram';
+import Diagram, { ContextMenu, ContextToolbox, PropertiesPanel, Group, Tab, HistoryToolbar, ViewToolbar, MainToolbar, Command, Toolbox, CustomShape,   Nodes,Edges, AutoLayout, Editing,  } from 'devextreme-react/diagram';
 import { confirm } from 'devextreme/ui/dialog';
+import Popup from "devextreme/ui/popup";
+
 import 'whatwg-fetch';
 
 const pageCommands = ['pageSize', 'pageOrientation', 'pageColor'];
 const menuCommands = ['bringToFront', 'sendToBack', 'lock', 'unlock'];
+const viewCommands = [
+  "zoomLevel", 
+  {name: "export", icon: "export", items: ["exportSvg","exportPng","exportJpg"]},
+  {name: "settings", icon: "preferences", items: ['showGrid','snapToGrid','gridSize','units', 'simpleView','toolbox']}
+];
+// "units"
 
 function itemLockedExpr(obj, value) {
   console.log(obj);
@@ -73,6 +81,7 @@ class App extends Component {
           id: 107,
           text: "A new ticket",
           type: "terminator",
+          position: "CEO"
         },
         {
           id: 108,
@@ -176,7 +185,8 @@ class App extends Component {
           text: null,
           toId: 120
         }
-      ]
+      ],
+      selected_node: null
     }
 
     this.diagramRef = React.createRef();
@@ -224,7 +234,7 @@ class App extends Component {
     }
   }
 
-  onSelectionChanged({ items }) {
+  onSelectionChanged = ({ items }) => {
     console.log(items);
     // var selectedItemNames = "Nobody has been selected";
     // items = items
@@ -240,6 +250,17 @@ class App extends Component {
     // this.setState({
     //   selectedItemNames
     // });
+  
+    if(items.length > 0){
+      var temp = [];
+      temp.push({...items[0].dataItem, itemType: items[0].itemType });
+      console.log(temp);
+      this.setState({
+        selected_node: temp[0]
+      })
+    }
+    
+
   }
 
 
@@ -254,6 +275,7 @@ class App extends Component {
     const {step_list} = this.state;
     return (
       <>
+      {console.log(this.state.selected_node)}
       <Diagram id="diagram" 
           ref={this.diagramRef} 
           onCustomCommand={this.onCustomCommand} 
@@ -262,18 +284,17 @@ class App extends Component {
           onContentReady={this.onContentReady}
           onSelectionChanged={this.onSelectionChanged}
           >
-        <ContextMenu enabled={true} commands={menuCommands}  />
-        <Editing
-          allowChangeShapeText={false}
-        />
+        {/* <ContextMenu enabled={true} commands={menuCommands}  /> */}
+        <Editing allowChangeShapeText={false}/>
         <ContextToolbox enabled={true} category="flowchart" shapeIconsPerRow={5} width={200} />
-        <PropertiesPanel visibility="visible">
-          <Tab>
+        <PropertiesPanel>
+          <Tab title="Page Properties" ope>
             <Group title="Page Properties" commands={pageCommands} />
           </Tab>
         </PropertiesPanel>
-        <HistoryToolbar visible={false} />
-        <ViewToolbar visible={true} />
+        <HistoryToolbar visible={true} />
+        <ViewToolbar visible={true} commands={viewCommands} />
+
         <MainToolbar visible={true}>
           <Command name="undo" />
           <Command name="redo" />
@@ -292,6 +313,7 @@ class App extends Component {
           <Command name="clear" icon="clearsquare" text="Clear Diagram" />
           <Command name="export"/>
         </MainToolbar>
+
         {step_list.map((item, index) => {
           return <CustomShape  category="workflows" type={index} baseType={item.type} defaultText={item.text} allowEditText={false} key={index} />
         })}
@@ -301,8 +323,7 @@ class App extends Component {
           idExpr="id"
           typeExpr="type"
           textExpr="text"
-          // lockedExpr={itemLockedExpr}
-          
+          // lockedExpr={itemLockedExpr}       
         >
           <AutoLayout type="layered" />
         </Nodes>
@@ -314,8 +335,6 @@ class App extends Component {
           toExpr="toId"
         />
 
-
-
         {/* <CustomShape category="workflows" type={`1`} baseType="rectangle"
          defaultText="step 1 test" allowEditText={false} key={1} />; */}
         {/* <Toolbox visibility="visible" showSearch={false} shapeIconsPerRow={4} width={220}>
@@ -325,7 +344,52 @@ class App extends Component {
           <Group category="workflows" title="Work Flows" displayMode="texts" />
         </Toolbox>
       </Diagram>
+      <div 
+        // className="card-table-ma"
+        style={{
+          position: "absolute",
+          top: "55px",
+          right: "25px",
+          width: "auto",
+          height: "auto",
+          zIndex: 9999,
+          background: "white",
+          borderRadius: "2px",
+          boxShadow: "1px -1px 23px 0px rgba(0,0,0,0.75)"
+        }}
+      >
+        <div className="row m-2">
+            <div></div>
+        </div>
+        <div className="row m-2">
+            <div className="col-5">
+                <span style={{color: "grey"}}>id: </span>
+            </div>
+            <div className="col-7">
+            <span style={{color: "#0500A3"}}>  {this.state.selected_node != null? this.state.selected_node.id : "-" }</span>
+            </div>
+        </div>
+
+        <div className="row m-2">
+            <div className="col-5">
+            <span style={{color: "grey"}}>text: </span>
+            </div>
+            <div className="col-7">
+              <span style={{color: "#0500A3"}}> {this.state.selected_node != null? this.state.selected_node.text : "-" }</span>
+            </div>
+        </div>
+
+        <div className="row m-2">
+            <div className="col-5">
+            <span style={{color: "grey"}}>type: </span>
+            </div>
+            <div className="col-7">
+              <span style={{color: "#0500A3"}}>{this.state.selected_node != null? this.state.selected_node.itemType : "-" }</span>
+            </div>
+        </div>
+      </div>
       <button className="btn btn-dark my-2"onClick={() => this.exportStuff()}>test</button>
+
       </>
     );
   }
