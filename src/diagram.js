@@ -186,7 +186,7 @@ class App extends Component {
           toId: 120
         }
       ],
-      visible_popup: false, 
+      visible_popup: true, 
       selected_node: null
     }
 
@@ -274,6 +274,7 @@ class App extends Component {
         right: "25px",
         width: "auto",
         height: "auto",
+        minWidth: "160px",
         zIndex: 9999,
         background: "white",
         borderRadius: "2px",
@@ -284,29 +285,29 @@ class App extends Component {
           <div className="col-12 text-right" onClick={() => this.openPopUp()} style={{cursor: "pointer"}}>x</div>
       </div>
       <div className="row m-2">
-          <div className="col-5">
-              <span style={{color: "grey"}}>id: </span>
+          <div className="col-5" >
+              <span style={{color: "black"}}>id: </span>
           </div>
-          <div className="col-7">
-          <span style={{color: "#0500A3"}}>  {this.state.selected_node != null? this.state.selected_node.id : "-" }</span>
+          <div className="col-7 text-center" style={{ border: "1px solid black", borderRadius:"5px"}}>
+          <span style={{color: "black"}}>  {this.state.selected_node != null? this.state.selected_node.id : "-" }</span>
+          </div>
+      </div>
+
+      <div className="row m-2">
+          <div className="col-5" >
+          <span style={{color: "black"}}>text: </span>
+          </div>
+          <div className="col-7" style={{ border: "1px solid black", borderRadius:"5px"}}>
+            <span style={{color: "black"}}> {this.state.selected_node != null? this.state.selected_node.text : "-" }</span>
           </div>
       </div>
 
       <div className="row m-2">
           <div className="col-5">
-          <span style={{color: "grey"}}>text: </span>
+          <span style={{color: "black"}}>type: </span>
           </div>
-          <div className="col-7">
-            <span style={{color: "#0500A3"}}> {this.state.selected_node != null? this.state.selected_node.text : "-" }</span>
-          </div>
-      </div>
-
-      <div className="row m-2">
-          <div className="col-5">
-          <span style={{color: "grey"}}>type: </span>
-          </div>
-          <div className="col-7">
-            <span style={{color: "#0500A3"}}>{this.state.selected_node != null? this.state.selected_node.itemType : "-" }</span>
+          <div className="col-7 text-center" style={{ border: "1px solid black", borderRadius:"5px"}}>
+            <span style={{color: "black"}}>{this.state.selected_node != null? this.state.selected_node.itemType : "-" }</span>
           </div>
       </div>
     </div>
