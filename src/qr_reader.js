@@ -3,18 +3,6 @@ import QrReader from 'react-qr-reader'
 import { AuthType, createClient } from "webdav";
 
 
-// const client = createClient(
-//   "https://bbtec.cloudhm.io/remote.php/dav/files/photoreport/",
-//   {
-//       username: "photoreport",
-//       password: "12345"
-//   }
-// );
-
-
-
-
-
 class QReader extends Component {
     
     constructor(props){
@@ -25,7 +13,7 @@ class QReader extends Component {
         }
     
         this.handleScan = this.handleScan.bind(this)
-        this.openImageDialog = this.openImageDialog.bind(this)
+        // this.openImageDialog = this.openImageDialog.bind(this)
 
       }
       handleScan(result){
@@ -37,13 +25,11 @@ class QReader extends Component {
         console.error(err)
       }
 
-      openImageDialog() {
-        this.refs.qrReader1.openImageDialog()
-      }
+      // openImageDialog() {
+      //   this.refs.qrReader1.openImageDialog()
+      // }
 
       async test(){
-    
-
         // await client.getDirectoryContents("/").then((val)=>{
         //    console.log(val);
         // });
@@ -67,11 +53,11 @@ class QReader extends Component {
               />
             </div>
 
-            <div className="col-12 m-2" style={{fontSize: "calc(10px + 2vmin)"}}>
+            {/* <div className="col-12 m-2" style={{fontSize: "calc(10px + 2vmin)"}}>
                <input type="button" value="Submit QR Code" onClick={this.openImageDialog} />
-            </div>
+            </div> */}
 
-            <div className="col-12 m-2" style={{fontSize: "calc(10px + 2vmin)"}}>
+            <div className="col-12 m-2 text-center" style={{fontSize: "calc(10px + 2vmin)"}}>
                 <p>{this.state.result}</p>
             </div>
 
