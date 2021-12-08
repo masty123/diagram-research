@@ -36,7 +36,7 @@ function Example() {
     <div className="row"> 
       <div className="col-12 text-center my-1">
         {/* {findLongestName(data)} */}
-        {getLongestName}
+        {/* {getLongestName} */}
       </div>
 
       <div className="col-12 text-center my-1">

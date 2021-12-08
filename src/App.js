@@ -40,8 +40,8 @@ function App() {
       {/* <UseLayoutEffectLearn/> */}
       {/* <UseImperativeHandleLearn/> */}
       {/* <UseContextLearn/> */}
-      {/* <UseMemo/> */}
-      <UseCallback/>
+      <UseMemo/>
+      {/* <UseCallback/> */}
 
           {/* <div className="row mx-5"> 
             <div className="col-12">
