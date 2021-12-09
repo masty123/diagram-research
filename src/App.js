@@ -8,7 +8,7 @@ import HookLearn from "./usestate_usereducer_learn";
 import UseEffectLearn from "./useeffect_learn";
 import UseRefLearn from "./useref_learn";
 import UseLayoutEffectLearn from "./uselayouteffect_learn"
-import UseImperativeHandleLearn from "./useImperativeHandle";
+import UseImperativeHandleLearn from "./useimperativehandle_learn/useImperativeHandle";
 import UseContextLearn from "./usecontext_learn/usecontext_learn"
 import UseMemo from "./usememo_learn";
 import UseCallback from "./usecallback_learn/CallBackTutorial";
@@ -38,9 +38,9 @@ function App() {
       {/* <UseEffectLearn /> */}
       {/* <UseRefLearn/> */}
       {/* <UseLayoutEffectLearn/> */}
-      {/* <UseImperativeHandleLearn/> */}
+      <UseImperativeHandleLearn/>
       {/* <UseContextLearn/> */}
-      <UseMemo/>
+      {/* <UseMemo/> */}
       {/* <UseCallback/> */}
 
           {/* <div className="row mx-5"> 
